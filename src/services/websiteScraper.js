@@ -1,5 +1,5 @@
 import axios from 'axios';
-import cheerio from 'cheerio';
+import { load } from 'cheerio';
 
 export const websiteScraper = {
   async scrapeWebsite(url) {
@@ -11,7 +11,7 @@ export const websiteScraper = {
         timeout: 10000
       });
 
-      const $ = cheerio.load(response.data);
+      const $ = load(response.data);
       const metrics = this.extractMetrics($, url);
 
       return metrics;

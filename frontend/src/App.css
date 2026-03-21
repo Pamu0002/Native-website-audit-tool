@@ -278,6 +278,133 @@ textarea::placeholder {
   background: rgba(0, 217, 255, 0.5);
 }
 
+/* PROBABILISTIC AI DATA DISPLAY */
+
+/* Confidence Scores Section */
+.confidence-section {
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--primary);
+}
+
+.confidence-section strong {
+  color: var(--primary);
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+.confidence-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.confidence-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.6rem;
+  background: rgba(0, 217, 255, 0.08);
+  border-left: 3px solid var(--primary);
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.confidence-level {
+  font-weight: bold;
+  min-width: 60px;
+}
+
+.confidence-text {
+  flex: 1;
+  color: var(--text-secondary);
+  padding: 0 0.5rem;
+}
+
+.confidence-score {
+  color: var(--success);
+  font-weight: bold;
+  min-width: 45px;
+  text-align: right;
+}
+
+/* Uncertainties Section */
+.uncertainties-section {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  background: rgba(217, 70, 239, 0.08);
+  border-left: 3px solid var(--secondary);
+  border-radius: 4px;
+}
+
+.uncertainties-section strong {
+  color: var(--secondary);
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.uncertainties-list {
+  list-style: none;
+  padding-left: 1rem;
+  margin: 0;
+}
+
+.uncertainties-list li {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+  position: relative;
+  padding-left: 0.8rem;
+}
+
+.uncertainties-list li:before {
+  content: "⚠";
+  position: absolute;
+  left: 0;
+  color: var(--secondary);
+}
+
+/* Model Decision Section */
+.model-decision {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  background: rgba(57, 255, 20, 0.1);
+  border-left: 3px solid var(--success);
+  border-radius: 4px;
+}
+
+.model-decision strong {
+  color: var(--success);
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.model-decision p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Responsive Probabilistic Data */
+@media (max-width: 768px) {
+  .confidence-item {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .confidence-text {
+    flex: 0 0 100%;
+  }
+
+  .confidence-score {
+    min-width: auto;
+  }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .message-content {

@@ -5,13 +5,13 @@ import { websiteScraper } from '../services/websiteScraper.js';
 export const conversationRouter = express.Router();
 
 // Start new conversation
-conversationRouter.post('/start', (req, res) => {
+conversationRouter.post('/start', async (req, res) => {
   const { userId } = req.body;
   if (!userId) {
     return res.status(400).json({ error: 'userId required' });
   }
 
-  const conversation = conversationManager.createConversation(userId);
+  const conversation = await conversationManager.createConversation(userId);
   res.json({
     conversationId: conversation.id,
     message: '👋 Welcome! I\'m your AI Website Audit Assistant. I can help you analyze websites and provide insights. What would you like to audit today?'
@@ -42,14 +42,30 @@ conversationRouter.post('/message', async (req, res) => {
       }
     }
 
-    // Process message through AI
+    // Process message through AI (with probabilistic reasoning)
     const response = await conversationManager.processMessage(
       conversationId,
       message,
       auditData
     );
 
-    res.json(response);
+    // Return full probabilistic response
+    res.json({
+      conversationId: response.conversationId,
+      message: response.message,
+      
+      // PROBABILISTIC DATA - what makes this AI-native
+      confidences: response.confidences || {},
+      modelDecision: response.modelDecision,
+      uncertainties: response.uncertainties || [],
+      
+      // Suggested actions based on probabilistic reasoning
+      suggestedActions: response.suggestedActions || [],
+      nextStep: response.nextStep,
+      
+      // Model's reasoning transparency
+      modelReasoning: response.reasoning || {}
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

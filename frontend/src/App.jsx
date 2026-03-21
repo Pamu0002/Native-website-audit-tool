@@ -63,12 +63,25 @@ export function App() {
         url: url || undefined
       });
 
+      // Extract probabilistic data
+      const { confidences, modelDecision, uncertainties, suggestedActions, nextStep, modelReasoning } = response.data;
+
       setMessages(prev => [...prev, {
         role: 'assistant',
         content: response.data.message,
         timestamp: new Date(),
-        suggestedActions: response.data.suggestedActions,
-        nextStep: response.data.nextStep
+        
+        // PROBABILISTIC DATA
+        confidences: confidences || {},
+        modelDecision,
+        uncertainties: uncertainties || [],
+        
+        // Actions and recommendations
+        suggestedActions: suggestedActions || [],
+        nextStep,
+        
+        // Model's reasoning transparency
+        modelReasoning
       }]);
     } catch (error) {
       setMessages(prev => [...prev, {
@@ -100,9 +113,47 @@ export function App() {
           <div key={idx} className={`message ${msg.role}`}>
             <div className="message-content">
               {msg.content}
-              {msg.suggestedActions && msg.suggestedActions.length > 0 && (
+              
+              {/* DISPLAY CONFIDENCE SCORES */}
+              {msg.role === 'assistant' && msg.confidences && Object.keys(msg.confidences).length > 0 && (
+                <div className="confidence-section">
+                  <strong>📊 Model Confidence Scores:</strong>
+                  <div className="confidence-list">
+                    {Object.entries(msg.confidences).map(([key, conf], i) => (
+                      <div key={i} className="confidence-item">
+                        <span className="confidence-level">{conf.level}</span>
+                        <span className="confidence-text">{conf.text?.substring(0, 80)}</span>
+                        <span className="confidence-score">{(conf.score * 100).toFixed(0)}%</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              {/* DISPLAY UNCERTAINTIES */}
+              {msg.role === 'assistant' && msg.uncertainties && msg.uncertainties.length > 0 && (
+                <div className="uncertainties-section">
+                  <strong>❓ Model Uncertainties:</strong>
+                  <ul className="uncertainties-list">
+                    {msg.uncertainties.map((uncertainty, i) => (
+                      <li key={i}>{uncertainty}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              
+              {/* DISPLAY MODEL DECISION */}
+              {msg.role === 'assistant' && msg.modelDecision && (
+                <div className="model-decision">
+                  <strong>🎯 Model Decision:</strong>
+                  <p>{msg.modelDecision}</p>
+                </div>
+              )}
+              
+              {/* DISPLAY SUGGESTED ACTIONS */}
+              {msg.role === 'assistant' && msg.suggestedActions && msg.suggestedActions.length > 0 && (
                 <div className="suggested-actions">
-                  <strong>💡 Suggested next steps:</strong>
+                  <strong>💡 Suggested Actions:</strong>
                   <ul>
                     {msg.suggestedActions.map((action, i) => (
                       <li key={i}>{action}</li>
@@ -110,9 +161,11 @@ export function App() {
                   </ul>
                 </div>
               )}
-              {msg.nextStep && (
+              
+              {/* DISPLAY NEXT STEP */}
+              {msg.role === 'assistant' && msg.nextStep && (
                 <div className="next-step">
-                  <strong>➡️ Want to: {msg.nextStep}</strong>
+                  <strong>➡️ Next Step: {msg.nextStep}</strong>
                 </div>
               )}
             </div>
