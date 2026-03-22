@@ -20,6 +20,13 @@ Unlike traditional form-based audit tools, this application guides you through w
 - **Dynamic Reports**: Personalized audit insights generated on-the-fly
 - **Autonomous Suggestions**: AI recommends websites to audit
 
+## 📹 Quick Start Videos
+
+See the tool in action:
+- **[Startup & Setup](videos/README.md#demo-1-project-startup)** - Installation and running the app
+- **[Website Audit Demo](videos/README.md#demo-2-website-audit-example)** - Analyzing a website with AI
+- **[Conv​ersation Flow](videos/README.md#demo-3-multi-turn-conversation)** - Multi-turn analysis with context
+
 ## 📋 Architecture
 
 ```
