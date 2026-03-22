@@ -73,7 +73,7 @@ cd frontend && npm install && cd ..
 GROQ_API_KEY=your_key_here
 AI_PROVIDER=groq
 GROQ_MODEL=llama-3.3-70b-versatile
-PORT=3000
+PORT=3001
 NODE_ENV=development
 ```
 
@@ -87,8 +87,8 @@ npm start
 cd frontend && npm run dev
 ```
 
-- **Backend**: http://localhost:3000
-- **Frontend**: http://localhost:5174
+- **Backend**: http://localhost:3001
+- **Frontend**: http://localhost:5175
 
 ## 📡 API Endpoints
 
