@@ -45,18 +45,67 @@ cp .env.example .env
 # Edit .env and add: GROQ_API_KEY=your_api_key_here
 ```
 
-### Run Application
+### Run Application Locally
 
+**Option 1: Quick Run (Automatic)**
 ```bash
 # Terminal 1: Start Backend (Port 3001)
 npm start
 
-# Terminal 2: Start Frontend (Port 5175)
-cd frontend && npm run dev
+# Terminal 2 (New Terminal): Start Frontend (Port 5175)
+cd frontend
+npm run dev
 
 # Open Browser
-# http://localhost:5175
+http://localhost:5175
 ```
+
+**Option 2: Development Mode**
+```bash
+# Terminal 1: Backend with hot-reload
+npm run dev
+
+# Terminal 2: Frontend with hot-reload
+cd frontend
+npm run dev
+```
+
+**Option 3: Production Build**
+```bash
+# Build and run production
+npm run build
+cd frontend && npm run build && cd ..
+npm start
+```
+
+---
+
+## ☁️ Deployed Application
+
+🌐 **Live URL**: https://native-website-audit-tool.vercel.app  
+(Deployed on Vercel - Frontend + Backend combined)
+
+**Status**: ✅ Ready to use  
+**Backend API**: `https://native-website-audit-tool.vercel.app/api/`  
+**Frontend UI**: `https://native-website-audit-tool.vercel.app/`
+
+### Deploy Your Own
+
+```bash
+# 1. Install Vercel CLI
+npm install -g vercel
+
+# 2. Deploy to Vercel
+vercel
+
+# 3. Set Environment Variables (in Vercel Dashboard)
+# GROQ_API_KEY = your_api_key_here
+# NODE_ENV = production
+```
+
+### Local vs Deployed
+- **Local**: Backend `http://localhost:3001`, Frontend `http://localhost:5175`
+- **Deployed**: Everything on `https://native-website-audit-tool.vercel.app`
 
 ---
 
